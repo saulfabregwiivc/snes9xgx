@@ -507,21 +507,21 @@ int main(int argc, char *argv[])
 				case 1: Settings.SuperFXSpeedPerLine = 0.417 * 20.5e6; break;
 				case 2: Settings.SuperFXSpeedPerLine = 0.417 * 40.5e6; break;
 				case 3: Settings.SuperFXSpeedPerLine = 0.417 * 60.5e6; break;
-				case 4: Settings.SuperFXSpeedPerLine = 0.417 * 80.5e6; break;
-				case 5: Settings.SuperFXSpeedPerLine = 0.417 * 100.5e6; break;
-				case 6: Settings.SuperFXSpeedPerLine = 0.417 * 120.5e6; break;
 			}
 
 			if (GCSettings.sfxOverclock > 0)
+			{
 			S9xResetSuperFX();
-			else
 			S9xReset();
+			}
 
 			switch (GCSettings.Interpolation)
 			{
 			case 0: Settings.InterpolationMethod = DSP_INTERPOLATION_GAUSSIAN; break;
 			case 1: Settings.InterpolationMethod = DSP_INTERPOLATION_LINEAR; break;
-			case 2: Settings.InterpolationMethod = DSP_INTERPOLATION_NONE; break;
+			case 2: Settings.InterpolationMethod = DSP_INTERPOLATION_CUBIC; break;
+			case 3: Settings.InterpolationMethod = DSP_INTERPOLATION_SINC; break;
+			case 4: Settings.InterpolationMethod = DSP_INTERPOLATION_NONE; break;
 			}
 		}
 		
