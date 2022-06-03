@@ -1987,20 +1987,7 @@ static int MenuGameSaves(int action)
 			}
 			else // save
 			{
-				if(ret == -2) // new SRAM
-				{
-					for(i=1; i < 100; i++)
-						if(saves.files[FILE_SRAM][i] == 0)
-							break;
-
-					if(i < 100)
-					{
-						MakeFilePath(filepath, FILE_SRAM, Memory.ROMFilename, i);
-						SaveSRAM(filepath, NOTSILENT);
-						menu = MENU_GAME_SAVE;
-					}
-				}
-				else if(ret == -1) // new State
+				if(ret == -2) // new State
 				{
 					for(i=1; i < 100; i++)
 						if(saves.files[FILE_SNAPSHOT][i] == 0)
@@ -2009,7 +1996,20 @@ static int MenuGameSaves(int action)
 					if(i < 100)
 					{
 						MakeFilePath(filepath, FILE_SNAPSHOT, Memory.ROMFilename, i);
-						SaveSnapshot (filepath, NOTSILENT);
+						SaveSnapshot(filepath, NOTSILENT);
+						menu = MENU_GAME_SAVE;
+					}
+				}
+				else if(ret == -1 && GCSettings.HideSRAMSaving == 0) // new SRAM
+				{
+					for(i=1; i < 100; i++)
+						if(saves.files[FILE_SRAM][i] == 0)
+							break;
+
+					if(i < 100)
+					{
+						MakeFilePath(filepath, FILE_SRAM, Memory.ROMFilename, i);
+						SaveSRAM (filepath, NOTSILENT);
 						menu = MENU_GAME_SAVE;
 					}
 				}
@@ -3790,14 +3790,16 @@ static int MenuSettingsAudio()
 		{
 		case 0:
 				GCSettings.Interpolation++;
-				if (GCSettings.Interpolation > 2) {
+				if (GCSettings.Interpolation > 4) {
 					GCSettings.Interpolation = 0;
 				}
 				switch(GCSettings.Interpolation)
 				{
 					case 0: Settings.InterpolationMethod = DSP_INTERPOLATION_GAUSSIAN; break;
 					case 1: Settings.InterpolationMethod = DSP_INTERPOLATION_LINEAR; break;
-					case 2: Settings.InterpolationMethod = DSP_INTERPOLATION_NONE; break;
+					case 2: Settings.InterpolationMethod = DSP_INTERPOLATION_CUBIC; break;
+					case 3: Settings.InterpolationMethod = DSP_INTERPOLATION_SINC; break;
+					case 4: Settings.InterpolationMethod = DSP_INTERPOLATION_NONE; break;
 				}
 				break;
 				S9xReset();
@@ -3814,6 +3816,10 @@ static int MenuSettingsAudio()
 				case 1:
 					sprintf (options.value[0], "Linear"); break;
 				case 2:
+					sprintf (options.value[0], "Cubic"); break;
+				case 3:
+					sprintf (options.value[0], "Sinc"); break;
+				case 4:
 					sprintf (options.value[0], "None"); break;
 			}
 			optionBrowser.TriggerUpdate();
@@ -4232,6 +4238,7 @@ static int MenuSettingsMenu()
 	sprintf(options.name[i++], "Rumble");
 	sprintf(options.name[i++], "Language");
 	sprintf(options.name[i++], "Preview Image");
+	sprintf(options.name[i++], "Hide SRAM Saving");
 	options.length = i;
 
 	for(i=0; i < options.length; i++)
@@ -4317,6 +4324,9 @@ static int MenuSettingsMenu()
 				if(GCSettings.PreviewImage > 2)
 					GCSettings.PreviewImage = 0;
 				break;
+			case 7:
+				GCSettings.HideSRAMSaving ^= 1;
+				break;
 		}
 
 		if(ret >= 0 || firstRun)
@@ -4365,6 +4375,11 @@ static int MenuSettingsMenu()
 				sprintf (options.value[4], "Enabled");
 			else
 				sprintf (options.value[4], "Disabled");
+			
+			if (GCSettings.HideSRAMSaving == 1)
+				sprintf (options.value[7], "On");
+			else
+				sprintf (options.value[7], "Off");
 
 			switch(GCSettings.language)
 			{
