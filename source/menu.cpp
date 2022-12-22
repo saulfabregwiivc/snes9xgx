@@ -1719,6 +1719,7 @@ static int MenuGame()
 				if(GCSettings.AutoloadGame) {
 					#ifdef HW_RVL
 					Playlog_Exit();
+					break;
 					#endif
 					ExitApp();
 				}
