@@ -38,8 +38,9 @@
 #include "menu.h"
 #include "utils/gettext.h"
 #include "utils/FreeTypeGX.h"
+
 #ifdef HW_RVL
-#include "utils/playlog.h"
+#include "utils/playlog/playlog.h"
 #endif
 
 #include "snes9x/snes9x.h"
