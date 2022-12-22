@@ -38,6 +38,7 @@
 #include "menu.h"
 #include "utils/gettext.h"
 #include "utils/FreeTypeGX.h"
+#include "utils/playlog.h"
 
 #include "snes9x/snes9x.h"
 #include "snes9x/fxemu.h"
