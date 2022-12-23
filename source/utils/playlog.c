@@ -15,6 +15,7 @@
 #include <string.h>
 #include <ogcsys.h>
 #include <malloc.h>
+#include "playlog.h"
 #include "tools.h"
 
 #define SECONDS_TO_2000 946684800LL
