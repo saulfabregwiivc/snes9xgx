@@ -8,15 +8,14 @@
 	Most of the code was taken from here:
 	http://forum.wiibrew.org/read.php?27,22130
 
-	Modified by Dimok and SuSo
+	Modified by Dimok
 */
 
 #include <stdio.h>
 #include <string.h>
 #include <ogcsys.h>
 #include <malloc.h>
-
-#define ALIGN32(x) (((x) + 31) & ~31)
+#include "tools.h"
 
 #define SECONDS_TO_2000 946684800LL
 #define TICKS_PER_SECOND 60750000LL
