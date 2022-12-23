@@ -39,10 +39,6 @@
 #include "utils/gettext.h"
 #include "utils/FreeTypeGX.h"
 
-#ifdef HW_RVL
-#include "utils/playlog/playlog.h"
-#endif
-
 #include "snes9x/snes9x.h"
 #include "snes9x/fxemu.h"
 #include "snes9x/memmap.h"
@@ -1717,10 +1713,6 @@ static int MenuGame()
 				gameScreen = NULL;
 				ClearScreenshot();
 				if(GCSettings.AutoloadGame) {
-					#ifdef HW_RVL
-					Playlog_Exit();
-					break;
-					#endif
 					ExitApp();
 				}
 				else {
