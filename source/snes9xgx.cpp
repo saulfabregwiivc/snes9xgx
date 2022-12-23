@@ -47,7 +47,7 @@
 #include "utils/FreeTypeGX.h"
 
 #ifdef HW_RVL
-	#include "utils/playlog.h"
+	#include "utils/wmb/playlog.h"
 #endif
 
 #include "snes9x/snes9x.h"
