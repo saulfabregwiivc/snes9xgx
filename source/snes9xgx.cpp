@@ -125,7 +125,9 @@ void ExitApp()
 		else
 		{
 			// Update Wii Message Board playlog time
+			#ifdef HW_RVL
 			Playlog_Exit();
+			#endif
 			// Wii channel support
 			SYS_ResetSystem( SYS_RETURNTOMENU, 0, 0 );
 		}
