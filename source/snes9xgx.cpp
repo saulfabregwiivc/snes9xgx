@@ -46,6 +46,10 @@
 #include "utils/wiidrc.h"
 #include "utils/FreeTypeGX.h"
 
+#ifdef HW_RVL
+	#include "utils/playlog/playlog.h"
+#endif
+
 #include "snes9x/snes9x.h"
 #include "snes9x/fxemu.h"
 #include "snes9x/memmap.h"
@@ -120,6 +124,10 @@ void ExitApp()
 		}
 		else
 		{
+		#ifdef HW_RVL
+			// Update Wii Message Board playlog time
+			Playlog_Exit();
+		#endif
 			// Wii channel support
 			SYS_ResetSystem( SYS_RETURNTOMENU, 0, 0 );
 		}
