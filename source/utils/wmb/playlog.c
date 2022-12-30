@@ -13,7 +13,6 @@
 #include <string.h>
 #include <ogcsys.h>
 #include <malloc.h>
-#include "playlog.h"
 #include "tools.h"
 
 #define SECONDS_TO_2000 946684800LL
@@ -68,7 +67,7 @@ int Playlog_Create(void)
 	return ret;
 }
 
-int Playlog_Update(const char * ID, const u16 * title)
+int Playlog_Exit(const char * ID, const u16 * title)
 {
 	if(!ID || !title)
 		return -1;
