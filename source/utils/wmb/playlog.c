@@ -32,7 +32,6 @@ typedef struct _PlayRec
 			u16 name[42];
 			u64 ticks_boot;
 			u64 ticks_last;
-			char title_id[6];
 			char unknown[18];
 		} ATTRIBUTE_PACKED;
 	};
@@ -67,11 +66,8 @@ int Playlog_Create(void)
 	return ret;
 }
 
-int Playlog_Exit(const char * ID, const u16 * title)
+int Playlog_Exit(void)
 {
-	if(!ID || !title)
-		return -1;
-
 	//If not started from SystemMenu, create playlog
 	Playlog_Create();
 
@@ -106,10 +102,6 @@ int Playlog_Exit(const char * ID, const u16 * title)
 	u64 stime = getWiiTime();
 	playrec_buf->ticks_boot = stime;
 	playrec_buf->ticks_last = stime;
-
-	//Update channel name and ID
-	memcpy(playrec_buf->name, title, 84);
-	memcpy(playrec_buf->title_id, ID, 6);
 
 	//Calculate and update checksum
 	for(i = 0; i < 31; i++)
