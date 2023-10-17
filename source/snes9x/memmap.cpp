@@ -3745,6 +3745,7 @@ void CMemory::ApplyROMFixes (void)
 	S9xAPUAllowTimeOverflow(Timings.APUAllowTimeOverflow);
 	#endif
 	
+	/*
 	#ifdef GEKKO
 	if (match_id("YI  ")) { // Super Mario World 2 - Yoshi's Island 
 			Timings.SuperFX2CoreSpeed = 8 / 3;
@@ -3753,6 +3754,7 @@ void CMemory::ApplyROMFixes (void)
 			Timings.SuperFX2CoreSpeed = 5 / 2;
 		}
 	#endif
+	*/
 	
 	// Other timing hacks
 	// The delay to sync CPU and DMA which Snes9x does not emulate.
