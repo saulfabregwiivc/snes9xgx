@@ -1481,10 +1481,6 @@ bool8 CMemory::LoadROMInt (int32 ROMfillSize)
 	CalculatedSize = ((ROMfillSize + 0x1fff) / 0x2000) * 0x2000;
 
 	if (CalculatedSize > 0x400000 &&
-		(ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x1320 && // exclude SuperFX
-		(ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x1420 &&
-		(ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x1520 &&
-		(ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x1A20 &&
 		(ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x3423 && // exclude SA-1
 		(ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x3523 &&
 		(ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x4332 && // exclude S-DD1
@@ -3119,12 +3115,12 @@ void CMemory::Map_SuperFXLoROMMap (void)
 	printf("Map_SuperFXLoROMMap\n");
 	map_System();
 
-	// Replicate the first 2Mb of the ROM at ROM + 8MB such that each 32K
+	// Replicate the first 2Mb of the ROM at ROM + 2MB such that each 32K
 	// block is repeated twice in each 64K block.
 	for (int c = 0; c < 64; c++)
 	{
-		memmove(&ROM[0x800000 + c * 0x10000], &ROM[c * 0x8000], 0x8000);
-		memmove(&ROM[0x808000 + c * 0x10000], &ROM[c * 0x8000], 0x8000);
+		memmove(&ROM[0x200000 + c * 0x10000], &ROM[c * 0x8000], 0x8000);
+		memmove(&ROM[0x208000 + c * 0x10000], &ROM[c * 0x8000], 0x8000);
 	}
 
 	map_lorom(0x00, 0x3f, 0x8000, 0xffff, CalculatedSize);
