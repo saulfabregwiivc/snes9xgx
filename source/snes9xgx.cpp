@@ -24,6 +24,7 @@
 
 #ifdef HW_RVL
 #include <di/di.h>
+#include <ogc/usbmouse.h>
 #include <wiiuse/wpad.h>
 #endif
 #ifdef USE_VM
@@ -433,6 +434,8 @@ int main(int argc, char *argv[])
 	#else
 	DVD_Init (); // Initialize DVD subsystem (GameCube only)
 	#endif
+
+	MOUSE_Init(); // for USB mouse (only for SNES Mouse atm)
 	
 	SetupPads();
 	InitDeviceThread();
